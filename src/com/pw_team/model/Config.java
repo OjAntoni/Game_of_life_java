@@ -23,10 +23,10 @@ public class Config {
      */
     public static Color getCollor(Status status) {
         return switch (status) {
-            case NONE -> Color.BLACK;
-            case BORN -> Color.GRAY;
-            case LIVE -> Color.WHITE;
-            case DIED -> Color.BLUE;
+            case NONE -> Color.WHITE;
+            case BORN -> Color.YELLOW;
+            case LIVE -> Color.ORANGE;
+            case DIED -> Color.RED;
         };
     }
 }
