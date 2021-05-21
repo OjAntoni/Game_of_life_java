@@ -4,6 +4,11 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Klasa Box jest "reprezentantem" naszej komórki
+ * na JFrame w objekcie JPanel, z których składa się
+ * pole do symulacji gry
+ */
 public class Box extends JPanel {
 
     Cell cell;
@@ -11,7 +16,7 @@ public class Box extends JPanel {
     public Box (int x, int y){
         super();
         cell = new Cell();
-        setBounds(x * Config.SIZE,y * Config.SIZE, Config.SIZE,Config.SIZE);
+        setBounds(x * Config.SIZE,y * Config.SIZE, Config.SIZE, Config.SIZE);
         setBackground(Config.getCollor(Status.NONE));
         addMouseListener(new MouseAdapter() {
             @Override
@@ -19,12 +24,8 @@ public class Box extends JPanel {
                 cell.turn();
             }
         });
-
-
     }
-    public void initCells(int x, int y){
 
-    }
     public void setColor()
     {
         setBackground(Config.getCollor(cell.getStatus()));

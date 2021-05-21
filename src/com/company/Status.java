@@ -4,6 +4,7 @@ public enum Status {
     BORN,
     LIVE,
     DIED;
+
     public Status step1(int around)
     {
         return switch (this) {

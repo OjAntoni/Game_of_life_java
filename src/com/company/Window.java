@@ -5,18 +5,25 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Klasa służąca do tworzenia graficznego pola do gry
+ * i zawerająca w sobie logikę gry i zachowania się komórek
+ */
 public class Window implements Runnable {
     JFrame frame;
     Box[][] boxes;
 
     @Override
     public void run() {
-
         initFrame();
         initBoxes();
         initTimer();
     }
 
+    /**
+     * metoda initFrame() służy do stworzenia obiektu JFrame
+     * i nadaniu mu bazowych, niezbędnych charakterystyk
+     */
     void initFrame() {
         frame = new JFrame();
         frame.getContentPane().setLayout(null);
@@ -38,10 +45,17 @@ public class Window implements Runnable {
             for (int y = 0; y < Config.HEIGHT; y++)
                 for (int sx = -1; sx <= +1; sx++)
                     for (int sy = -1; sy <= +1; sy++)
+                    /*
+                     * @TODO написпть разграничение по методу поиска соседей
+                     * @TODO пока у нас ищатся ВСЕ соседи (т.е и по диагонали)
+                     * @TODO надо добавуть условие в if что ... || !(Math.abs(sx)==1 && !(Math.abs(sy)==1)
+                     */
                         if (!(sx == 0 && sy == 0))
                             boxes[x][y].cell.addNear(boxes
                                     [(x + sx + Config.WIDTH) % Config.WIDTH]
                                     [(y + sy + Config.HEIGHT) % Config.HEIGHT].cell);
+        //@TODO этот цикл просто в конкретном месте сразу же при запуске делает клетки живыми. Хз оставлять или нет
+        //@TODO (конечно же убрать), но надо консультация с остальными:)
         for (int x = 10; x < 15; x++) {
             boxes[x][10].cell.setStatus(Status.LIVE);
             boxes[x][10].setColor();
@@ -60,10 +74,8 @@ public class Window implements Runnable {
             for (int x = 0; x < Config.WIDTH; x++)
                 for (int y = 0; y < Config.HEIGHT; y++)
                 {
-                    if(flop)
-                    boxes[x][y].step1();
-                    else
-                    boxes[x][y].step2();
+                    if(flop) boxes[x][y].step1();
+                    else boxes[x][y].step2();
                 }
         }
     }
