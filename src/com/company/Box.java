@@ -1,7 +1,6 @@
 package com.company;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -28,7 +27,7 @@ public class Box extends JPanel {
     }
     public void setColor()
     {
-        setBackground(Config.getCollor(cell.status));
+        setBackground(Config.getCollor(cell.getStatus()));
     }
 
     void step1(){

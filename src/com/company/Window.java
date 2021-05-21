@@ -43,7 +43,7 @@ public class Window implements Runnable {
                                     [(x + sx + Config.WIDTH) % Config.WIDTH]
                                     [(y + sy + Config.HEIGHT) % Config.HEIGHT].cell);
         for (int x = 10; x < 15; x++) {
-            boxes[x][10].cell.status = Status.LIVE;
+            boxes[x][10].cell.setStatus(Status.LIVE);
             boxes[x][10].setColor();
         }
     }

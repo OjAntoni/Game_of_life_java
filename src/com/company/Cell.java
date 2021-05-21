@@ -1,14 +1,13 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Cell {
-    ArrayList<Cell> near;
-    Status status;
+    public ArrayList<Cell> near;
+    private Status status;
 
     public Cell() {
-        status = Status.NONE;
+        setStatus(Status.NONE);
         near = new ArrayList<>();
     }
     void addNear(Cell cell){
@@ -16,23 +15,31 @@ public class Cell {
     }
     void step1() {
         int around = countNearCells();
-        status = status.step1(around);
+        setStatus(getStatus().step1(around));
     }
 
     void step2() {
-        status = status.step2();
+        setStatus(getStatus().step2());
     }
 
     int countNearCells() {
         int count = 0;
         for (Cell cell : near)
-            if (cell.status.isCell())
+            if (cell.getStatus().isCell())
                 count++;
         return count;
 
     }
     void turn(){
         for (Cell cell : near)
-            cell.status = cell.status.isCell() ? Status.NONE : Status.LIVE;
+            cell.setStatus(cell.getStatus().isCell() ? Status.NONE : Status.LIVE);
+    }
+
+    public com.company.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(com.company.Status status) {
+        this.status = status;
     }
 }
