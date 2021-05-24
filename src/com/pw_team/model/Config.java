@@ -10,11 +10,10 @@ import java.awt.*;
  * czyli  faktyczne my zmieniamy ilość komorek poziomo i pionowo
  */
 public class Config {
-    public static final int SIZE = 5;
-    public static final int WIDTH = 100;
-    public static final int HEIGHT = 100;
+    public static final int SIZE = 20;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 10;
     public static final int SLEEPMS = 100;
-
     /**
      * Statyczna metoda dla dodawania koloru komórce zgodnie z jej statusem
      * @param status status wybranej komórki

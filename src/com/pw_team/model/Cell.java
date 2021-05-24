@@ -1,5 +1,6 @@
 package com.pw_team.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * o komórce: dynamicznie zachowującą się tablicę sąsiednich komórek
  *            Aktualny status komórki z enum Status
  */
-public class Cell {
+public class Cell{
     public ArrayList<Cell> near;
     private Status status;
 

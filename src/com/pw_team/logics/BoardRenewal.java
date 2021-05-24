@@ -1,5 +1,7 @@
 package com.pw_team.logics;
 
+import com.pw_team.files.FileSaver;
+import com.pw_team.gui.GameWindow;
 import com.pw_team.model.Box;
 import com.pw_team.model.Config;
 import com.pw_team.model.Status;
@@ -10,15 +12,33 @@ import java.awt.event.ActionListener;
 
 public class BoardRenewal {
     public static Box[][] boxes;
-    public static void initBoxes(Box[][] b, JFrame gameFrame) {
-        b = new Box[Config.WIDTH][Config.HEIGHT];
-        for (int x = 0; x < Config.WIDTH; x++)
-            for (int y = 0; y < Config.HEIGHT; y++) {
-                b[x][y] = new Box(x, y);
-                gameFrame.add(b[x][y]);
+    private static final int width = GameWindow.getWidth();
+    private static final int height = GameWindow.getHeight();
+    private static boolean firstIt = true;
+    public static int sleepms = GameWindow.getSleepms();
+
+    public static void initBoxes(Box[][] b, JFrame gameFrame, int width, int height) {
+
+        if(firstIt && GameWindow.getInputFilePath()!=null){
+            boxes = GameWindow.boxes;
+            firstIt = false;
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    gameFrame.add(boxes[x][y]);
+                }
             }
-        for (int x = 0; x < Config.WIDTH; x++)
-            for (int y = 0; y < Config.HEIGHT; y++)
+        }
+        else {
+            boxes = new Box[width][height];
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    boxes[x][y] = new Box(x, y);
+                    gameFrame.add(boxes[x][y]);
+                }
+            }
+        }
+        for (int x = 0; x < width; x++)
+            for (int y = 0; y < height; y++)
                 for (int sx = -1; sx <= +1; sx++)
                     for (int sy = -1; sy <= +1; sy++)
                         /*
@@ -26,22 +46,18 @@ public class BoardRenewal {
                          * @TODO пока у нас ищатся ВСЕ соседи (т.е и по диагонали)
                          * @TODO надо добавуть условие в if что ... || !(Math.abs(sx)==1 && !(Math.abs(sy)==1)
                          */
-                        if (!(sx == 0 && sy == 0))
-                            b[x][y].cell.addNear(b
-                                    [(x + sx + Config.WIDTH) % Config.WIDTH]
-                                    [(y + sy + Config.HEIGHT) % Config.HEIGHT].cell);
-        //@TODO этот цикл просто в конкретном месте сразу же при запуске делает клетки живыми. Хз оставлять или нет
-        //@TODO (конечно же убрать), но надо консультация с остальными:)
-        for (int x = 10; x < 15; x++) {
-            b[x][10].cell.setStatus(Status.LIVE);
-            b[x][10].setColor();
-        }
-        boxes = b;
+                        // if(option==OptionConstants.OPTION_ONE) {
+                             if (!(sx == 0 && sy == 0))
+                                 boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
+                        // } else {
+                         //    if ( !(sx == 0 && sy == 0) && !(Math.abs(sx)==1 && !(Math.abs(sy)==1)) )
+                        //         boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
+                        // }
     }
 
     public static void initTimer(){
         TimerListener t1 = new TimerListener();
-        Timer timer = new Timer(Config.SLEEPMS,t1);
+        Timer timer = new Timer(sleepms,t1);
         timer.start();
     }
     private static class TimerListener implements ActionListener {
@@ -49,12 +65,15 @@ public class BoardRenewal {
         @Override
         public void actionPerformed(ActionEvent e){
             flop = !flop;
-            for (int x = 0; x < Config.WIDTH; x++)
-                for (int y = 0; y < Config.HEIGHT; y++)
+            FileSaver.save(GameWindow.outputFilePath);
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
                 {
                     if(flop) boxes[x][y].step1();
                     else boxes[x][y].step2();
                 }
         }
     }
+
+
 }

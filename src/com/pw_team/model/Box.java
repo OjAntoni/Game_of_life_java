@@ -1,22 +1,25 @@
 package com.pw_team.model;
 
+import com.pw_team.gui.GameWindow;
+
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
 /**
  * Klasa Box jest "reprezentantem" naszej komórki
  * na JFrame w objekcie JPanel, z których składa się
  * pole do symulacji gry
  */
-public class Box extends JPanel {
+public class Box extends JPanel{
 
     public Cell cell;
 
     public Box (int x, int y){
         super();
         cell = new Cell();
-        setBounds(x * Config.SIZE,y * Config.SIZE, Config.SIZE, Config.SIZE);
+        setBounds(x * GameWindow.getSize(),y * GameWindow.getSize(), GameWindow.getSize(), GameWindow.getSize());
         setBackground(Config.getCollor(Status.NONE));
         addMouseListener(new MouseAdapter() {
             @Override
