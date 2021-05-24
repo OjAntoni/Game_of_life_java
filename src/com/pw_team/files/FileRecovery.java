@@ -7,7 +7,10 @@ import com.pw_team.model.Status;
 
 import java.io.*;
 
-
+/**
+ * Klasa służąca jedynie do odczytu informacji
+ * z pliku o ścieżce zadanej jak parametr w metodzie pathToFile
+ */
 public class FileRecovery {
     public static void loadFile(String pathToFile){
         File file = new File(pathToFile);
@@ -29,7 +32,8 @@ public class FileRecovery {
                     Status status = Status.NONE;
                     switch (st){
                       case 0 -> status = Status.NONE;
-                      case 1, 2, 3 -> status = Status.LIVE;
+                      case 1, 2 -> status = Status.LIVE;
+                      case  3 -> status = Status.DIED;
                     };
                     GameWindow.boxes[x][y].cell.setStatus(status);
                 }

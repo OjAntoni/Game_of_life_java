@@ -24,11 +24,12 @@ public class SettingsWindow extends JFrame{
 
     public SettingsWindow(){
         super("Settings");
-        this.setBounds(100,100,300,100);
+        this.setBounds(100,100,300,140);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
         Container container = this.getContentPane();
-        container.setLayout(new GridLayout(4,2,2,2));
+        container.setLayout(new GridLayout(4,2,4,6));
         container.add(label);
         container.add(input);
         container.add(label2);

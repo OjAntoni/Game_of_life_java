@@ -46,13 +46,13 @@ public class BoardRenewal {
                          * @TODO пока у нас ищатся ВСЕ соседи (т.е и по диагонали)
                          * @TODO надо добавуть условие в if что ... || !(Math.abs(sx)==1 && !(Math.abs(sy)==1)
                          */
-                        // if(option==OptionConstants.OPTION_ONE) {
+                        if(GameWindow.getOption()==OptionConstants.OPTION_ONE) {
                              if (!(sx == 0 && sy == 0))
                                  boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
-                        // } else {
-                         //    if ( !(sx == 0 && sy == 0) && !(Math.abs(sx)==1 && !(Math.abs(sy)==1)) )
-                        //         boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
-                        // }
+                         } else {
+                            if ( !(sx == 0 && sy == 0) && !(Math.abs(sx)==1 && !(Math.abs(sy)==1)) )
+                                 boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
+                        }
     }
 
     public static void initTimer(){
@@ -65,7 +65,6 @@ public class BoardRenewal {
         @Override
         public void actionPerformed(ActionEvent e){
             flop = !flop;
-            FileSaver.save(GameWindow.outputFilePath);
             for (int x = 0; x < width; x++)
                 for (int y = 0; y < height; y++)
                 {

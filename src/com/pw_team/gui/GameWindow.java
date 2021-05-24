@@ -29,7 +29,7 @@ public class GameWindow implements Runnable {
     private static int sleepms = Config.SLEEPMS;
     public static String outputFilePath;
     private static String inputFilePath;
-    private int option = OptionConstants.OPTION_ONE;
+    private static int option = OptionConstants.OPTION_ONE;
 
     public GameWindow(String inputFilePath, String outputFilePath, int option, boolean noInputFile){
         if(noInputFile){
@@ -41,7 +41,7 @@ public class GameWindow implements Runnable {
             System.out.println(getInputFilePath()+" "+getSize()+" "+getWidth()+" "+getHeight());
         }
         GameWindow.outputFilePath = outputFilePath.equals("") ? "cache.txt" : outputFilePath;
-        this.option = option;
+        GameWindow.option = option;
 
     }
 
@@ -167,6 +167,10 @@ public class GameWindow implements Runnable {
 
     public static int getWidth() {
         return width;
+    }
+
+    public static int getOption() {
+        return option;
     }
 
     public static int getHeight() {

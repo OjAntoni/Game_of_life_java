@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Klasa służąca do zapisu informacji
+ * o parametrach gry do pliku.
+ */
 public class FileSaver {
     public static void save(String pathToFile){
         try(BufferedWriter out =new BufferedWriter(new FileWriter(pathToFile))) {
