@@ -70,6 +70,7 @@ public class SettingsWindow extends JFrame{
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
             Generator generator = new Generator();
+            generator.addWindowListener(new Generator.WindowListener());
         }
     }
 

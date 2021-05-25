@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class Generator extends JFrame {
     private final JTextField filenameText = new JTextField("generatedFile.txt", 20);
@@ -23,7 +24,7 @@ public class Generator extends JFrame {
     public Generator(){
         super("File Creator");
         this.setBounds(100,100,300,340);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         Container container = this.getContentPane();
@@ -97,5 +98,42 @@ public class Generator extends JFrame {
         return new Integer[]{10, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
     }
 
+    static class WindowListener implements java.awt.event.WindowListener{
+
+        @Override
+        public void windowOpened(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            father.setVisible(true);
+        }
+
+        @Override
+        public void windowClosed(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowIconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowDeiconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowActivated(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+
+        }
+    }
 
 }

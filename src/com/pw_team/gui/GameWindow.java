@@ -69,7 +69,7 @@ public class GameWindow implements Runnable {
 
 
 
-    class WindowListener implements java.awt.event.WindowListener{
+    static class WindowListener implements java.awt.event.WindowListener{
 
         /**
          * Invoked the first time a window is made visible.

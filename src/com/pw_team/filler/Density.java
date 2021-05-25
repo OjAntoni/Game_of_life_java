@@ -29,7 +29,7 @@ public enum Density {
     }
 
     public static String[] getAllDesnsities(){
-        return new String[]{"Vary rare","Rare","Normal","High","Very high"};
+        return new String[]{"Very rare","Rare","Normal","High","Very high"};
     }
 
     public static int getCoef(int index){
