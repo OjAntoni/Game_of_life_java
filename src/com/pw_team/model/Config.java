@@ -10,7 +10,7 @@ import java.awt.*;
  * czyli  faktyczne my zmieniamy ilość komorek poziomo i pionowo
  */
 public class Config {
-    public static final int SIZE = 20;
+    public static final int SIZE = 10;
     public static final int WIDTH = 100;
     public static final int HEIGHT = 100;
     public static final int SLEEPMS = 100;

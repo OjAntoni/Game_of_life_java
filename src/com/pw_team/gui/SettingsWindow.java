@@ -16,12 +16,12 @@ public class SettingsWindow extends JFrame{
 
     public SettingsWindow(){
         super("Settings");
-        this.setBounds(100,100,300,240);
+        this.setBounds(100,100,350,320);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
         Container container = this.getContentPane();
-        container.setLayout(new GridLayout(5,2,4,6));
+        container.setLayout(new GridLayout(6,2,4,6));
         JLabel label = new JLabel("Input file:");
         container.add(label);
         container.add(input);
@@ -35,6 +35,25 @@ public class SettingsWindow extends JFrame{
         container.add(option1);
         option1.setSelected(true);
         container.add(option2);
+
+
+        JLabel labelFirst = new JLabel();
+        labelFirst.setBounds(new Rectangle(0,0,50,50));
+        Image firstImage = new ImageIcon("res/first.png").getImage();
+        Image modifiedFirstImage = firstImage.getScaledInstance(50,50, Image.SCALE_SMOOTH);
+        ImageIcon firstImagefinal = new ImageIcon(modifiedFirstImage);
+        labelFirst.setIcon(firstImagefinal);
+        container.add(labelFirst);
+
+
+        JLabel labelSecond = new JLabel();
+        labelSecond.setBounds(new Rectangle(0,0,50,50));
+        Image secondImage = new ImageIcon("res/second.png").getImage();
+        Image modifiedSecondImage = secondImage.getScaledInstance(50,50, Image.SCALE_SMOOTH);
+        ImageIcon secondImagefinal = new ImageIcon(modifiedSecondImage);
+        labelSecond.setIcon(secondImagefinal);
+        container.add(labelSecond);
+
         container.add(check);
         JButton button = new JButton("Apply");
         button.addActionListener(new ButtonEventListener());

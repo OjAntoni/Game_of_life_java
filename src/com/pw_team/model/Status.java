@@ -21,7 +21,7 @@ public enum Status {
         else{
             return switch (this) {
                 case NONE -> (around == 2) ? BORN : NONE;
-                case LIVE -> (around <= 0 || around >= 3) ? DIED : LIVE;
+                case LIVE -> (around <= 1 || around >= 4) ? DIED : LIVE;
                 default -> this;
             };
         }
