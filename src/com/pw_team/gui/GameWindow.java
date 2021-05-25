@@ -18,7 +18,7 @@ import java.io.*;
 
 /**
  * Klasa służąca do tworzenia graficznego pola do gry
- * i zawerająca w sobie logikę gry i zachowania się komórek
+ * i zawerająca w sobie pola do konfiguracji
  */
 public class GameWindow implements Runnable {
     JFrame gameFrame;
