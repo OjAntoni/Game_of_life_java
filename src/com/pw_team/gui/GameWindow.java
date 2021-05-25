@@ -38,7 +38,6 @@ public class GameWindow implements Runnable {
         else{
             GameWindow.inputFilePath = inputFilePath;
             FileRecovery.loadFile(inputFilePath);
-            System.out.println(getInputFilePath()+" "+getSize()+" "+getWidth()+" "+getHeight());
         }
         GameWindow.outputFilePath = outputFilePath.equals("") ? "cache.txt" : outputFilePath;
         GameWindow.option = option;
@@ -90,7 +89,6 @@ public class GameWindow implements Runnable {
          */
         @Override
         public void windowClosing(WindowEvent e) {
-            System.out.println("Closing window "+ sleepms);
             FileSaver.save(outputFilePath);
         }
 

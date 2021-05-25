@@ -9,55 +9,61 @@ import javax.swing.*;
 
 public class SettingsWindow extends JFrame{
 
-    private JButton button = new JButton("Apply");
-    private JTextField input = new JTextField("",20);
-    private JLabel label = new JLabel("Input file:");
-    private JTextField input2 = new JTextField("",20);
-    private JLabel label2 = new JLabel("Output file:");
-    private JRadioButton option1 = new JRadioButton("First nieghbourhood");
-    private JRadioButton option2 = new JRadioButton("Second nieghbourhood");
-    private JCheckBox check = new JCheckBox("No input file", true);
-    private String fileInputPath;
-    private String fileOutputPath;
-    private int option;
-    private boolean withoutFile;
+    private final JTextField input = new JTextField("",20);
+    private final JTextField input2 = new JTextField("",20);
+    private final JRadioButton option1 = new JRadioButton("First nieghbourhood");
+    private final JCheckBox check = new JCheckBox("No input file", true);
 
     public SettingsWindow(){
         super("Settings");
-        this.setBounds(100,100,300,140);
+        this.setBounds(100,100,300,240);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
         Container container = this.getContentPane();
-        container.setLayout(new GridLayout(4,2,4,6));
+        container.setLayout(new GridLayout(5,2,4,6));
+        JLabel label = new JLabel("Input file:");
         container.add(label);
         container.add(input);
+        JLabel label2 = new JLabel("Output file:");
         container.add(label2);
         container.add(input2);
         ButtonGroup group = new ButtonGroup();
         group.add(option1);
+        JRadioButton option2 = new JRadioButton("Second nieghbourhood");
         group.add(option2);
         container.add(option1);
         option1.setSelected(true);
         container.add(option2);
         container.add(check);
+        JButton button = new JButton("Apply");
         button.addActionListener(new ButtonEventListener());
+        JButton generateFile = new JButton("Generate file");
+        generateFile.addActionListener(new generateButtonListener());
+        container.add(generateFile);
+        container.add(new JLabel());
         container.add(button);
         setVisible(true);
     }
 
+    class generateButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            Generator generator = new Generator();
+        }
+    }
+
     class ButtonEventListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
-           fileInputPath = input.getText();
-            System.out.println(fileInputPath);
-           fileOutputPath = input2.getText();
-            System.out.println(fileOutputPath+"in ActionListener");
-           option = option1.isSelected() ? OptionConstants.OPTION_ONE : OptionConstants.OPTION_TWO;
-           withoutFile = check.isSelected();
-           if(!withoutFile) {
+            String fileInputPath = input.getText();
+            String fileOutputPath = input2.getText();
+            int option = option1.isSelected() ? OptionConstants.OPTION_ONE : OptionConstants.OPTION_TWO;
+            boolean withoutFile = check.isSelected();
+            if(!withoutFile) {
                while (true) {
                    try {
-                       if(fileInputPath!=null)
+                       if(fileInputPath !=null)
                            FileChecker.checkForCurrency(fileInputPath);
                        break;
                    } catch (Exception e) {
