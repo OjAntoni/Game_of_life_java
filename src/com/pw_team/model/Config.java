@@ -8,12 +8,17 @@ import java.awt.*;
  * WIDTH, HEIGHT - rozmiary pola gry. Rozmiar jest tworzony na podstawie wzoru
  * [Config.SIZE * Config.WIDTH + 25, Config.SIZE * Config.HEIGHT + 45],
  * czyli  faktyczne my zmieniamy ilość komorek poziomo i pionowo
+ * DEATH_BORDERS - true = komórka po osiągnięciu stanu granicznego umiera :(
+ *                 false = atomatycznie po wyjściu za granicy pola
+ *                         komórka zjawia się z przeciwnej strony
  */
 public class Config {
     public static final int SIZE = 10;
     public static final int WIDTH = 100;
     public static final int HEIGHT = 100;
     public static final int SLEEPMS = 100;
+    public static final boolean DEATH_BORDERS = true;
+
     /**
      * Statyczna metoda dla dodawania koloru komórce zgodnie z jej statusem
      * @param status status wybranej komórki

@@ -37,22 +37,19 @@ public class BoardRenewal {
                 }
             }
         }
-        for (int x = 0; x < width; x++)
-            for (int y = 0; y < height; y++)
+        int config_addition = Config.DEATH_BORDERS ? -1 : 0;
+        for (int x = 0; x < width+config_addition; x++)
+            for (int y = 0; y < height+config_addition; y++)
                 for (int sx = -1; sx <= +1; sx++)
-                    for (int sy = -1; sy <= +1; sy++)
-                        /*
-                         * @TODO написпть разграничение по методу поиска соседей
-                         * @TODO пока у нас ищатся ВСЕ соседи (т.е и по диагонали)
-                         * @TODO надо добавуть условие в if что ... || !(Math.abs(sx)==1 && !(Math.abs(sy)==1)
-                         */
-                        if(GameWindow.getOption()==OptionConstants.OPTION_ONE) {
-                             if (!(sx == 0 && sy == 0))
-                                 boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
-                         } else {
-                            if ( !(sx == 0 && sy == 0) && !(Math.abs(sx)==1 && !(Math.abs(sy)==1)) )
-                                 boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
+                    for (int sy = -1; sy <= +1; sy++) {
+                        if (GameWindow.getOption() == OptionConstants.OPTION_ONE) {
+                            if (!(sx == 0 && sy == 0))
+                                calculateNear(x,y,sx,sy);
+                        } else {
+                            if (!(sx == 0 && sy == 0) && !(Math.abs(sx) == 1 && !(Math.abs(sy) == 1)))
+                                calculateNear(x,y,sx,sy);
                         }
+                    }
     }
 
     public static void initTimer(){
@@ -60,6 +57,7 @@ public class BoardRenewal {
         Timer timer = new Timer(sleepms,t1);
         timer.start();
     }
+
     private static class TimerListener implements ActionListener {
         boolean flop = false;
         @Override
@@ -74,5 +72,13 @@ public class BoardRenewal {
         }
     }
 
-
+    private static void calculateNear(int x, int y, int sx, int sy){
+        if(!Config.DEATH_BORDERS)
+            boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
+        else {
+            if(!(x*y==0 || x==width-1 || y==height-1)){
+                boxes[x][y].cell.addNear(boxes[(x + sx + width) % width][(y + sy + height) % height].cell);
+            }
+        }
+    }
 }
