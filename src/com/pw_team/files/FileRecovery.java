@@ -32,7 +32,8 @@ public class FileRecovery {
                     Status status = Status.NONE;
                     switch (st){
                       case 0 -> status = Status.NONE;
-                      case 1, 2 -> status = Status.LIVE;
+                      case 1 -> status = Status.BORN;
+                      case 2 -> status = Status.LIVE;
                       case  3 -> status = Status.DIED;
                     };
                     GameWindow.boxes[x][y].cell.setStatus(status);
